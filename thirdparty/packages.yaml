@@ -1,0 +1,30 @@
+apt_packages:
+  yaml-cpp: false
+  doxygen: false
+  PNG: false
+  TIFF: false
+  JPEG: false
+  ZLIB: false
+  GLUT: false
+  GLEW: false
+  GLFW: false
+  GLM: false
+  JSON: false
+  glog: false
+  gflags: false
+build_packages:
+  Eigen3: 
+    version_num: 3.4.0
+    cmake_flags:
+      debug : ""
+      release :
+        - "-DCMAKE_CXX_FLAGS=\"-Ofast\""
+  Pangolin:
+    version_num: 0.8
+    cmake_flags:
+      debug :
+        - "-DCMAKE_CXX_FLAGS=\"-w\""
+      release :
+        - "-DCMAKE_CXX_FLAGS=\"-w\""
+python3:
+  EVO: 1.15.0
