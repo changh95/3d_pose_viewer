@@ -1,5 +1,7 @@
 # 3d_pose_viewer
 A simple 3D coordinate viewer. Currently supports KITTI dataset pose format.
+Inspired by GaoXiang's slambook
+
 
 ## Demo
 
