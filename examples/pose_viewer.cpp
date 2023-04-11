@@ -3,6 +3,9 @@
 
 #include <unistd.h>
 
+constexpr double t_scale = 0.0001;
+constexpr double vis_scale = 0.001;
+
 void DrawTrajectory(
   std::vector<Eigen::Isometry3d, Eigen::aligned_allocator<Eigen::Isometry3d>>);
 
@@ -36,7 +39,7 @@ int main(int argc, char **argv)
     Eigen::Matrix<double, 3, 3> mat;
     mat << m11, m12, m13, m21, m22, m23, m31, m32, m33;
     Eigen::Isometry3d Twr(mat);
-    Twr.pretranslate(Eigen::Vector3d(m14 * 0.001, m24 * 0.001, m34 * 0.001));
+    Twr.pretranslate(Eigen::Vector3d(m14 * t_scale, m24 * t_scale, m34 * t_scale));
     poses.push_back(Twr);
   }
   std::cout << "read total " << poses.size() << " pose entries" << std::endl;
@@ -71,7 +74,7 @@ void DrawTrajectory(
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     d_cam.Activate(s_cam);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glLineWidth(2);
+    glLineWidth(3);
 
     // Draw World coordinate frame
     glBegin(GL_LINES);
@@ -90,13 +93,52 @@ void DrawTrajectory(
     const auto y_unit_vec = Eigen::Vector3d(0, 1, 0);
     const auto z_unit_vec = Eigen::Vector3d(0, 0, 1);
 
+    // Draw the first axis with YELLOW
+    {
+      const Eigen::Vector3d Ow = poses[0].translation();
+      const Eigen::Vector3d Xw = poses[0] * (vis_scale * x_unit_vec);
+      const Eigen::Vector3d Yw = poses[0] * (vis_scale * y_unit_vec);
+      const Eigen::Vector3d Zw = poses[0] * (vis_scale * z_unit_vec);
+      glBegin(GL_LINES);
+      glColor3f(1.0, 1.0, 0.0);
+      glVertex3d(Ow[0], Ow[1], Ow[2]);
+      glVertex3d(Xw[0], Xw[1], Xw[2]);
+      glColor3f(1.0, 1.0, 0.0);
+      glVertex3d(Ow[0], Ow[1], Ow[2]);
+      glVertex3d(Yw[0], Yw[1], Yw[2]);
+      glColor3f(1.0, 1.0, 0.0);
+      glVertex3d(Ow[0], Ow[1], Ow[2]);
+      glVertex3d(Zw[0], Zw[1], Zw[2]);
+      glEnd();
+    }
+
+    // Draw the last axis with YELLOW
+    {
+      const auto last_index = poses.size() - 1;
+      const Eigen::Vector3d Ow = poses[last_index].translation();
+      const Eigen::Vector3d Xw = poses[last_index] * (vis_scale * x_unit_vec);
+      const Eigen::Vector3d Yw = poses[last_index] * (vis_scale * y_unit_vec);
+      const Eigen::Vector3d Zw = poses[last_index] * (vis_scale * z_unit_vec);
+      glBegin(GL_LINES);
+      glColor3f(1.0, 0.0, 1.0);
+      glVertex3d(Ow[0], Ow[1], Ow[2]);
+      glVertex3d(Xw[0], Xw[1], Xw[2]);
+      glColor3f(1.0, 0.0, 1.0);
+      glVertex3d(Ow[0], Ow[1], Ow[2]);
+      glVertex3d(Yw[0], Yw[1], Yw[2]);
+      glColor3f(1.0, 0.0, 1.0);
+      glVertex3d(Ow[0], Ow[1], Ow[2]);
+      glVertex3d(Zw[0], Zw[1], Zw[2]);
+      glEnd();
+    }
+
     // Draw axis for each pose
     for (size_t i = 0; i < poses.size(); i++)
     {
       const Eigen::Vector3d Ow = poses[i].translation();
-      const Eigen::Vector3d Xw = poses[i] * (0.001 * x_unit_vec);
-      const Eigen::Vector3d Yw = poses[i] * (0.001 * y_unit_vec);
-      const Eigen::Vector3d Zw = poses[i] * (0.001 * z_unit_vec);
+      const Eigen::Vector3d Xw = poses[i] * (vis_scale * x_unit_vec);
+      const Eigen::Vector3d Yw = poses[i] * (vis_scale * y_unit_vec);
+      const Eigen::Vector3d Zw = poses[i] * (vis_scale * z_unit_vec);
       glBegin(GL_LINES);
       glColor3f(1.0, 0.0, 0.0);
       glVertex3d(Ow[0], Ow[1], Ow[2]);
