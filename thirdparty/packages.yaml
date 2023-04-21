@@ -1,17 +1,17 @@
 apt_packages:
-  yaml-cpp: false
-  doxygen: false
-  PNG: false
-  TIFF: false
-  JPEG: false
-  ZLIB: false
-  GLUT: false
-  GLEW: false
-  GLFW: false
-  GLM: false
-  JSON: false
-  glog: false
-  gflags: false
+  yaml-cpp: true
+  doxygen: true
+  PNG: true
+  TIFF: true
+  JPEG: true
+  ZLIB: true
+  GLUT: true
+  GLEW: true
+  GLFW: true
+  GLM: true
+  JSON: true
+  glog: true
+  gflags: true
 build_packages:
   Eigen3: 
     version_num: 3.4.0

@@ -4,3 +4,5 @@ cmake-build-release
 
 thirdparty/eigen
 thirdparty/pangolin
+
+.DS_Store

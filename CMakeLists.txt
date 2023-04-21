@@ -21,6 +21,15 @@ else (${Pangolin_FOUND})
     message(STATUS "Could not support Pangolin")
 endif (${Pangolin_FOUND})
 
+include(FetchContent)
+FetchContent_Declare(json
+        GIT_REPOSITORY https://github.com/nlohmann/json
+        GIT_TAG v3.10.5
+        GIT_PROGRESS TRUE
+        GIT_SHALLOW TRUE)
+
+FetchContent_MakeAvailable(json)
+
 # Executable
 add_executable(pose_viewer examples/pose_viewer.cpp)
 target_link_libraries(pose_viewer ${Pangolin_LIBRARIES})
