@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(pose_viewer)
 
 # Dependencies
-find_package(Eigen3 3.3.8 EXACT REQUIRED PATHS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/eigen/share/eigen3/cmake)
+find_package(Eigen3 REQUIRED PATHS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/eigen/share/eigen3/cmake)
 if(${Eigen3_FOUND})
     message(STATUS "Found: Eigen3 - ${EIGEN3_INCLUDE_DIRS}")
 
@@ -10,7 +10,7 @@ if(${Eigen3_FOUND})
     set(EIGEN3_LIBS Eigen3::Eigen)
 endif(${Eigen3_FOUND})
 
-find_package(Pangolin 0.8 EXACT REQUIRED PATHS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/pangolin/lib/cmake/Pangolin)
+find_package(Pangolin REQUIRED PATHS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/pangolin/lib/cmake/Pangolin)
 if (${Pangolin_FOUND})
     message(STATUS "Found Pangolin - ${Pangolin_DIR}")
 

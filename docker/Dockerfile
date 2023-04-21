@@ -19,9 +19,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata &
 
 RUN git clone https://github.com/changh95/3d_pose_viewer.git && \
     cd 3d_pose_viewer &&\
-    python3 ./build_dependencies.py
-
-RUN mkdir build && cd build && \
-    cmake ../
+    python3 ./build_dependencies.py &&\
+    mkdir build && cd build && \
+    cmake -GNinja ../ && \
+    ninja
 
 
