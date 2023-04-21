@@ -14,7 +14,7 @@ apt_packages:
   gflags: true
 build_packages:
   Eigen3: 
-    version_num: 3.4.0
+    version_num: 3.3.8
     cmake_flags:
       debug : ""
       release :
