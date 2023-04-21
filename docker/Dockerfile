@@ -11,10 +11,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata &
   libjpeg-dev \
   libpng-dev \
   libtiff-dev \
+  libeigen3-dev \
   python3 \
-  python3-pip; \
-  apt-get autoclean && \
-  apt-get clean && \
+  python3-pip && \
   pip3 install pyyaml gitpython
 
 RUN git clone https://github.com/changh95/3d_pose_viewer.git && \
